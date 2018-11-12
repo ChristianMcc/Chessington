@@ -18,7 +18,7 @@ namespace Chessington.GameEngine.Pieces
                 if (currentSquare.Row == 7)
                 {
                     availableMoves.Add(Square.At(currentSquare.Row - 2, currentSquare.Col));
-                    availableMoves.Add(Square.At(6, 0));
+                    availableMoves.Add(Square.At(currentSquare.Row - 1, currentSquare.Col));
                 }
                 else
                 {
@@ -31,7 +31,7 @@ namespace Chessington.GameEngine.Pieces
                 if (currentSquare.Row == 1)
                 {
                     availableMoves.Add(Square.At(currentSquare.Row + 2, currentSquare.Col));
-                    availableMoves.Add(Square.At(2, 0));
+                    availableMoves.Add(Square.At(currentSquare.Row + 1, currentSquare.Col));
                 }
                 else
                 {
