@@ -13,33 +13,27 @@ namespace Chessington.GameEngine.Pieces
         {
             var availableMoves = new List<Square>();
             var currentSquare = board.FindPiece(this);
-            if (Player == Player.White)
+            if (Player == Player.White && board.GetPiece(Square.At(currentSquare.Row - 1, currentSquare.Col)) == null)
             {
-                if (currentSquare.Row == 7)
+                if (currentSquare.Row == 7 && board.GetPiece(Square.At(currentSquare.Row - 2, currentSquare.Col)) == null)
                 {
                     availableMoves.Add(Square.At(currentSquare.Row - 2, currentSquare.Col));
-                    availableMoves.Add(Square.At(currentSquare.Row - 1, currentSquare.Col));
                 }
-                else
-                {
-                    availableMoves.Add(Square.At(currentSquare.Row - 1, currentSquare.Col));
-                }
-                
-            }
-            if (Player == Player.Black)
-            {
-                if (currentSquare.Row == 1)
-                {
-                    availableMoves.Add(Square.At(currentSquare.Row + 2, currentSquare.Col));
-                    availableMoves.Add(Square.At(currentSquare.Row + 1, currentSquare.Col));
-                }
-                else
-                {
-                    availableMoves.Add(Square.At(currentSquare.Row + 1, currentSquare.Col));
-                }
+
+                availableMoves.Add(Square.At(currentSquare.Row - 1, currentSquare.Col));
                 
             }
 
+            if (Player == Player.Black && board.GetPiece(Square.At(currentSquare.Row + 1, currentSquare.Col)) == null)
+            {
+                if (currentSquare.Row == 1 && board.GetPiece(Square.At(currentSquare.Row + 2, currentSquare.Col)) == null)
+                {
+                    availableMoves.Add(Square.At(currentSquare.Row + 2, currentSquare.Col));
+                }
+                availableMoves.Add(Square.At(currentSquare.Row + 1, currentSquare.Col));
+                
+            }
+            
             return availableMoves;
 
         }
