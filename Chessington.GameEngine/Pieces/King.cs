@@ -29,6 +29,12 @@ namespace Chessington.GameEngine.Pieces
                 if (square.Row < 0 || square.Col < 0 || square.Row > 7 || square.Col > 7)
                 {
                     movesToRemove.Add(square);
+                    continue;
+                }
+
+                if (board.GetPiece(square) != null && board.GetPiece(square).Player == board.CurrentPlayer)
+                {
+                    movesToRemove.Add(square);
                 }
             }
 
