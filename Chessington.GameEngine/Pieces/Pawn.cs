@@ -13,7 +13,7 @@ namespace Chessington.GameEngine.Pieces
         {
             var availableMoves = new List<Square>();
             var currentSquare = board.FindPiece(this);
-            if (Player == Player.White && board.GetPiece(Square.At(currentSquare.Row - 1, currentSquare.Col)) == null)
+            if (Player == Player.White && currentSquare.Row >= 1 && board.GetPiece(Square.At(currentSquare.Row - 1, currentSquare.Col)) == null)
             {
                 if (currentSquare.Row == 7 && board.GetPiece(Square.At(currentSquare.Row - 2, currentSquare.Col)) == null)
                 {
@@ -24,7 +24,7 @@ namespace Chessington.GameEngine.Pieces
                 
             }
 
-            if (Player == Player.Black && board.GetPiece(Square.At(currentSquare.Row + 1, currentSquare.Col)) == null)
+            if (Player == Player.Black && currentSquare.Row <= 6 && board.GetPiece(Square.At(currentSquare.Row + 1, currentSquare.Col)) == null)
             {
                 if (currentSquare.Row == 1 && board.GetPiece(Square.At(currentSquare.Row + 2, currentSquare.Col)) == null)
                 {
@@ -33,7 +33,19 @@ namespace Chessington.GameEngine.Pieces
                 availableMoves.Add(Square.At(currentSquare.Row + 1, currentSquare.Col));
                 
             }
-            
+
+            var movesToRemove = new List<Square>();
+
+            foreach (var square in availableMoves)
+            {
+                if (square.Row < 0 || square.Col < 0 || square.Row > 7 || square.Col > 7)
+                {
+                    movesToRemove.Add(square);
+                }
+            }
+
+            availableMoves = availableMoves.Except(movesToRemove).ToList();
+
             return availableMoves;
 
         }
