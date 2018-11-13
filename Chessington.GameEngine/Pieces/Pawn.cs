@@ -15,6 +15,27 @@ namespace Chessington.GameEngine.Pieces
             var currentSquare = board.FindPiece(this);
             if (Player == Player.White && currentSquare.Row >= 1 && board.GetPiece(Square.At(currentSquare.Row - 1, currentSquare.Col)) == null)
             {
+                if (currentSquare.Col > 0)
+                {
+                    var diagonalLeftSquare = new Square(currentSquare.Row - 1, currentSquare.Col - 1);
+                    if (board.GetPiece(diagonalLeftSquare) != null &&
+                        board.GetPiece(diagonalLeftSquare).Player != Player)
+                    {
+                        availableMoves.Add(diagonalLeftSquare);
+                    }
+                }
+
+                if (currentSquare.Col < 7)
+                {
+                    var diagonalRightSquare = new Square(currentSquare.Row - 1, currentSquare.Col + 1);
+
+                    if (board.GetPiece(diagonalRightSquare) != null &&
+                        board.GetPiece(diagonalRightSquare).Player != Player)
+                    {
+                        availableMoves.Add(diagonalRightSquare);
+                    }
+                }
+                
                 if (currentSquare.Row == 7 && board.GetPiece(Square.At(currentSquare.Row - 2, currentSquare.Col)) == null)
                 {
                     availableMoves.Add(Square.At(currentSquare.Row - 2, currentSquare.Col));
@@ -26,6 +47,27 @@ namespace Chessington.GameEngine.Pieces
 
             if (Player == Player.Black && currentSquare.Row <= 6 && board.GetPiece(Square.At(currentSquare.Row + 1, currentSquare.Col)) == null)
             {
+                if (currentSquare.Col > 0)
+                {
+                    var diagonalLeftSquare = new Square(currentSquare.Row + 1, currentSquare.Col - 1);
+                    if (board.GetPiece(diagonalLeftSquare) != null &&
+                        board.GetPiece(diagonalLeftSquare).Player != Player)
+                    {
+                        availableMoves.Add(diagonalLeftSquare);
+                    }
+                }
+
+                if (currentSquare.Col < 7)
+                {
+                    var diagonalRightSquare = new Square(currentSquare.Row + 1, currentSquare.Col + 1);
+
+                    if (board.GetPiece(diagonalRightSquare) != null &&
+                        board.GetPiece(diagonalRightSquare).Player != Player)
+                    {
+                        availableMoves.Add(diagonalRightSquare);
+                    }
+                }
+
                 if (currentSquare.Row == 1 && board.GetPiece(Square.At(currentSquare.Row + 2, currentSquare.Col)) == null)
                 {
                     availableMoves.Add(Square.At(currentSquare.Row + 2, currentSquare.Col));
